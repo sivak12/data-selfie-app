@@ -4,21 +4,24 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Data Selfie App</title>
   </head>
   <body>
-    <h1>Data Selfie App.</h1>
+    <h1>Data Selfie App</h1>
     <p>
       latitude: <span id="latitude"></span>&deg;<br />
       longitude: <span id="longitude"></span>&deg;
     </p>
+    <input type="text" name="txt" id="txtFeel" placeholder="How do you feel?" />
+    <br /><br />
     <button id="submit">submit</button>
 
     <script>
       let lat, lon;
       const button = document.getElementById("submit");
       button.addEventListener("click", async (event) => {
-        const data = { lat, lon };
+        const userFeel = document.getElementById("txtFeel").value;
+        const data = { lat, lon, userFeel };
         const options = {
           method: "POST",
           headers: {

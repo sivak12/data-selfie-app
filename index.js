@@ -8,9 +8,16 @@ app.use(express.json({ limit: "1mb" }));
 
 const database = new Datastore("database.db");
 database.loadDatabase();
-// database.insert({ name: "siva", status: ':rainbow' });
-// database.insert({ name: "sam", status: ':happy' });
 
+app.get("/api", (request, response) => {
+  database.find({}, (err, data) => {
+    if (err) {
+      response.end();
+      return;
+    }
+    response.json(data);
+  });
+});
 
 app.post("/api", (request, response) => {
   console.log(request.body);
@@ -18,15 +25,5 @@ app.post("/api", (request, response) => {
   const timestamp = Date.now();
   data.timestamp = timestamp;
   database.insert(data);
-  response.json({
-    status: "success.!",
-    timestamp: timestamp,
-    latitude: data.lat,
-    longitude: data.lon,
-  });
+  response.json(data);
 });
- ///TODO:
- /***** 
- 09/03/22
- Add one more field in the UI and save it to the database
- *******/
